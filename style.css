@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+* {
+    font-family: 'poppins';
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #e5eaf5;
+}
+h1 {
+    margin-top: 15px;
+    font-size: 4.5em;
+    font-weight: 40px;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    margin-left: 28.2%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 620px;
+    height: 620px;
+    border: 2px solid #cfd7e8;
+}
+.rows {
+    box-sizing: border-box;
+    border: 1px solid #e5eaf5;
+}
+.buttons-container {
+    margin-top: 8%;
+}
+.buttons {
+    background-color: #dcdcdc;
+    display: flex;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    margin-left: 7%;
+    flex-wrap: wrap;
+    font-size: 18px;
+    justify-content: center;
+    width: 15%;
+    height: 15%;
+    padding: 15px;
+    border: 1px solid #e5eaf5;
+}
+#favcolor {
+    #favcolor {
+        appearance: none; /* Removes default button styling */
+        background-color: #dcdcdc; /* Sets the button color */
+        border: none; /* Removes any borders */
+        border-radius: 50%; /* Makes it perfectly round */
+        width: 110px; /* Maintains round shape */
+        height: 110px; /* Maintains round shape */
+        outline: none; /* Removes focus outline */
+        box-shadow: none; /* Ensures no shadows are added */
+        padding: 0; /* Prevents any inner padding */
+        margin: 0; /* Prevents any external spacing */
+    }
+    
+}
