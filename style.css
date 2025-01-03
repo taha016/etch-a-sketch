@@ -9,6 +9,7 @@ body {
   background-color: #e5eaf5;
 }
 h1 {
+  position: relative;
   font-weight: 800;
   margin-top: 15px;
   font-size: 72px;
@@ -19,13 +20,15 @@ h1 {
 .container {
   position: absolute;
   background-color: rgb(255, 255, 255);
-  margin-left: 28%;
   display: flex;
   flex-wrap: wrap;
   width: 620px;
   height: 620px;
   border: 2px solid #cfd7e8;
+  left: 50%;
+  transform: translate(-49%, 0);
 }
+
 .rows {
   box-sizing: border-box;
   border: 1px solid #e5eaf5;
