@@ -12,13 +12,15 @@
   </head>
   <body>
     <h1 class="head">Etch-a-Sketch</h1>
-    <div class="container"></div>
+    <div class="container">
+      <div class="innercontainer"></div>
+    </div>
     <input type="color" class="buttons itemcenter" id="color-picker" value="#2f2f2f">
     <div class="buttons-container">
-      <button class="buttons" aria-selected="true">Color Mode</button>
-      <button class="buttons">Rainbow Mode</button>
-      <button class="buttons">Eraser</button>
-      <button class="buttons">Clear</button>
+      <button class="buttons color-mode">Color Mode</button>
+      <button class="buttons rainbow-mode">Rainbow Mode</button>
+      <button class="buttons eraser">Eraser</button>
+      <button class="buttons clear">Clear</button>
       <div class="slidecontainer">
         <input type="range" min="1" max="64" value="8" class="slider" id="myRange">
       </div>
