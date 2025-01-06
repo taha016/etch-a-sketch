@@ -10,9 +10,21 @@ const clearButton = document.querySelector(".buttons:nth-child(4)");
 
 let defaultColorValue = "#2f2f2f";
 let isMouseDown = false;
+let isColorMode = true;
+let isRainbowModeActive = false;
+let isErasing = false;
 
+// Function to generate a random RGB color
+function rainbow() {
+  let red = Math.floor(Math.random() * 256);
+  let green = Math.floor(Math.random() * 256);
+  let blue = Math.floor(Math.random() * 256);
+  return `rgb(${red}, ${green}, ${blue})`;
+}
+
+// Function to create rows dynamically
 function makeRows(rowNum) {
-  innerContainer.innerText = ""; // Clear existing rows
+  innerContainer.innerHTML = ""; // Clear existing rows
   const squareSize = innerContainer.clientWidth / rowNum;
 
   for (let i = 0; i < rowNum * rowNum; i++) {
@@ -24,11 +36,11 @@ function makeRows(rowNum) {
     // Add mouse events for drawing
     row.addEventListener("mousedown", () => {
       isMouseDown = true;
-      row.style.backgroundColor = defaultColorValue;
+      row.style.backgroundColor = isRainbowModeActive ? rainbow() : defaultColorValue;
     });
     row.addEventListener("mousemove", () => {
       if (isMouseDown) {
-        row.style.backgroundColor = defaultColorValue;
+        row.style.backgroundColor = isRainbowModeActive ? rainbow() : defaultColorValue;
       }
     });
 
@@ -41,16 +53,32 @@ colorPicker.addEventListener("input", (event) => {
   defaultColorValue = event.target.value;
 });
 
-//Color Mode
-colorMode.addEventListener("click", (event) => {
-  defaultColorValue;
-  defaultColorValue = event.target.value;
+// Color Mode
+colorMode.addEventListener("click", () => {
+  isRainbowModeActive = false; // Disable rainbow mode
+  defaultColorValue = colorPicker.value; // Use the selected color
+  colorMode.style.color = "#e5eaf5";
+  if(isColorMode) {
+    colorMode.style.backgroundColor = defaultColorValue;
+  } else {
+    colorMode.style.backgroundColor = "#e5eaf5";
+  }
 });
 
 // Eraser
-eraser.addEventListener("click", (event) => {
+eraser.addEventListener("click", () => {
+  let isColorMode = false;
+  isRainbowModeActive = false; // Disable rainbow mode
   defaultColorValue = "white";
-  defaultColorValue = event.target.value;
+  eraser.style.backgroundColor = "#2f2f2f";
+  eraser.style.color = "#e5eaf5";
+});
+
+// Rainbow Mode
+rainbowMode.addEventListener("click", () => {
+  let isColorMode = false;
+  isRainbowModeActive = !isRainbowModeActive; // Toggle rainbow mode
+  rainbowMode.textContent = isRainbowModeActive ? "Rainbow Mode: ON" : "Rainbow Mode: OFF"; // Update button text
 });
 
 // Clear grid
@@ -73,4 +101,4 @@ document.addEventListener("mouseup", () => {
 
 // Initialize
 sliderOutput.textContent = slider.value; // Display initial slider value
-makeRows(slider.value);
+makeRows(slider.value); // Create the initial grid

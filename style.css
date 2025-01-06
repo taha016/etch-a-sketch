@@ -49,6 +49,16 @@ h1 {
   height: 15%;
   padding: 10px;
   border: 1px solid;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+buttons:hover {
+  background-color: #2f2f2f;
+}
+
+buttons.active {
+  background-color: #2f2f2f;
+  color: #e5eaf5;
 }
 #color-picker {
     margin-top: 2.1em;
