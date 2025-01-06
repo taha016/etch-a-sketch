@@ -3,10 +3,10 @@ const innerContainer = document.querySelector(".innercontainer");
 const colorPicker = document.querySelector("#color-picker");
 const slider = document.querySelector("#myRange");
 const sliderOutput = document.querySelector("#demo");
-const colorMode = document.querySelector(".buttons:nth-child(1)");
-const rainbowMode = document.querySelector(".rainbow-mode");
-const eraser = document.querySelector(".eraser");
-const clearButton = document.querySelector(".buttons:nth-child(4)");
+const colorMode = document.querySelector(".color-mode"); // Use the specific class
+const rainbowMode = document.querySelector(".rainbow-mode"); // Use the specific class
+const eraser = document.querySelector(".eraser"); // Use the specific class
+const clearButton = document.querySelector(".clear"); // Use the specific class
 
 let defaultColorValue = "#2f2f2f";
 let isMouseDown = false;
@@ -22,7 +22,7 @@ function rainbow() {
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
-// Function to create rows dynamically
+// Do not change makeRows function
 function makeRows(rowNum) {
   innerContainer.innerHTML = ""; // Clear existing rows
   const squareSize = innerContainer.clientWidth / rowNum;
@@ -48,37 +48,58 @@ function makeRows(rowNum) {
   }
 }
 
-// Update color from color picker
-colorPicker.addEventListener("input", (event) => {
-  defaultColorValue = event.target.value;
-});
-
 // Color Mode
 colorMode.addEventListener("click", () => {
+  isColorMode = true;
   isRainbowModeActive = false; // Disable rainbow mode
+  isErasing = false; // Disable eraser
   defaultColorValue = colorPicker.value; // Use the selected color
+
+  // Update button styles
+  colorMode.style.backgroundColor = defaultColorValue;
   colorMode.style.color = "#e5eaf5";
-  if(isColorMode) {
-    colorMode.style.backgroundColor = defaultColorValue;
-  } else {
-    colorMode.style.backgroundColor = "#e5eaf5";
-  }
+  rainbowMode.style.backgroundColor = "#e5eaf5";
+  rainbowMode.style.color = "#2f2f2f";
+  eraser.style.backgroundColor = "#e5eaf5";
+  eraser.style.color = "#2f2f2f";
 });
 
 // Eraser
 eraser.addEventListener("click", () => {
-  let isColorMode = false;
+  isColorMode = false;
   isRainbowModeActive = false; // Disable rainbow mode
-  defaultColorValue = "white";
+  isErasing = true;
+  defaultColorValue = "white"; // Set to eraser color
+
+  // Update button styles
   eraser.style.backgroundColor = "#2f2f2f";
   eraser.style.color = "#e5eaf5";
+  colorMode.style.backgroundColor = "#e5eaf5";
+  colorMode.style.color = "#2f2f2f";
+  rainbowMode.style.backgroundColor = "#e5eaf5";
+  rainbowMode.style.color = "#2f2f2f";
 });
 
 // Rainbow Mode
 rainbowMode.addEventListener("click", () => {
-  let isColorMode = false;
+  isColorMode = false;
   isRainbowModeActive = !isRainbowModeActive; // Toggle rainbow mode
-  rainbowMode.textContent = isRainbowModeActive ? "Rainbow Mode: ON" : "Rainbow Mode: OFF"; // Update button text
+  isErasing = false; // Disable eraser
+
+  // for example if the rainbow mode is on, then this this statement should run
+  if (isRainbowModeActive) {
+    rainbowMode.style.backgroundColor = "#2f2f2f";
+    rainbowMode.style.color = "#e5eaf5";
+    colorMode.style.backgroundColor = "#e5eaf5";
+    colorMode.style.color = "#2f2f2f";
+    eraser.style.backgroundColor = "#e5eaf5";
+    eraser.style.color = "#2f2f2f";
+
+    // if isRainbowModeAcitve = false then run this:
+  } else {
+    rainbowMode.style.backgroundColor = "#e5eaf5";
+    rainbowMode.style.color = "#2f2f2f";
+  }
 });
 
 // Clear grid
@@ -99,6 +120,24 @@ document.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
 
+// Change color picker value
+colorPicker.addEventListener("change", () => {
+  isColorMode = true;
+  isRainbowModeActive = false; // Disable rainbow mode
+  isErasing = false; // Disable eraser
+  defaultColorValue = colorPicker.value; // Update the default color
+
+  // Update button styles
+  colorMode.style.backgroundColor = defaultColorValue;
+  colorMode.style.color = "#e5eaf5";
+  rainbowMode.style.backgroundColor = "#e5eaf5";
+  rainbowMode.style.color = "#2f2f2f";
+  eraser.style.backgroundColor = "#e5eaf5";
+  eraser.style.color = "#2f2f2f";
+});
+
 // Initialize
-sliderOutput.textContent = slider.value; // Display initial slider value
-makeRows(slider.value); // Create the initial grid
+window.addEventListener("load", () => {
+  sliderOutput.textContent = slider.value; // Display initial slider value
+  makeRows(slider.value); // Create the initial grid // Set initial button styles
+});
